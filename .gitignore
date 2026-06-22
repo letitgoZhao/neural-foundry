@@ -1,0 +1,31 @@
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Local runtime state
+.env
+*.log
+
+# Large model and training artifacts
+models/
+datasets/
+runs/
+artifacts/
+logs/
+hf-cache/
+modelscope-cache/
+
+# Model weight formats
+*.safetensors
+*.bin
+*.pt
+*.pth
+*.ckpt
+*.gguf
+
+# OS/editor
+.DS_Store
+.idea/
+.vscode/

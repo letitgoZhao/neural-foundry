@@ -1,0 +1,30 @@
+services:
+  qwen3-1-7b-vllm:
+    image: vllm/vllm-openai:latest
+    container_name: qwen3-1-7b-vllm
+    restart: unless-stopped
+    ipc: host
+    gpus: all
+    ports:
+      - "${PORT:-8000}:8000"
+    environment:
+      HF_HOME: /root/.cache/huggingface
+      VLLM_USE_MODELSCOPE: "${VLLM_USE_MODELSCOPE:-false}"
+    volumes:
+      - "${HF_HOME:-/data/neural-foundry/hf-cache}:/root/.cache/huggingface"
+    command:
+      - --model
+      - Qwen/Qwen3-1.7B
+      - --served-model-name
+      - Qwen/Qwen3-1.7B
+      - --host
+      - 0.0.0.0
+      - --port
+      - "8000"
+      - --max-model-len
+      - "${MAX_MODEL_LEN:-8192}"
+      - --gpu-memory-utilization
+      - "${GPU_MEMORY_UTILIZATION:-0.75}"
+      - --enable-reasoning
+      - --reasoning-parser
+      - qwen3
